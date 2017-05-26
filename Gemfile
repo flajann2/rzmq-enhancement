@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
 gem "semver2", "~> 3"
+gem 'ffi-rzmq'
+gem 'awesome_print'
 
 group :development do
   gem "rspec", "~> 3"

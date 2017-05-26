@@ -1,20 +1,26 @@
 # coding: utf-8
 
 require 'ffi-rzmq'
+require 'awesome_print'
 
 Thread.abort_on_exception = true
 
 module ZeroMQ
  
-  def zeromq name, endpoint = 'tcp://127.0.0.1:2200' &block
-    ctx = ZMQ::Context.create(1)
-    push_sock = ctx.socket(ZMQ::PUSH)
-    error_check(push_sock.setsockopt(ZMQ::LINGER, 0))
-    rc = push_sock.bind(endpoint)
-    error_check(rc)
+  def zeromq name, endpoint = 'tcp://127.0.0.1:2200', &block
+    @ctx = ZMQ::Context.create(1)
+    @push_sock = @ctx.socket(ZMQ::PUSH)
+    error_check(@push_sock.setsockopt(ZMQ::LINGER, 0))
+    @rc = @push_sock.bind(endpoint)
+    error_check(@rc)
     instance_eval &block
   end
 
+  def zq_push &block
+    ap @ctx
+    instance_eval &block
+  end
+  
   private
   def error_check rc
     if ZMQ::Util.resultcode_ok?(rc)
