@@ -1,6 +1,27 @@
 * rzmq-enhancement
 
-  Description goes here.
+  The ffi-rzmq wraps ZeroMQ nicely, but not in a Ruby-friendly manner.
+  here, we take that one step further to present a more Ruby-friendy
+  interface.
+
+** Preliminaries
+   
+   This is implemented as a DSLish Ruby-friendly interface.
+
+** Install
+   
+   Make sure the ZeroMQ library is already installed on your system. If you
+   are on a Mac, we recommend 'brew' or 'macports' to get it.
+   
+   From command-line:
+   #+begin_src bash
+   gem install rzmq-enhancement
+   #+end_src
+
+   Or in you Gemfile:
+   #+begin_src ruby
+   gem 'rzmq-enhancement'
+   #+end_src
 
 ** Contributing to rzmq-enhancement
  
@@ -14,5 +35,5 @@
 
 ** Copyright
 
-   Copyright (c) 2017 Fred Mitchell SB. See LICENSE.txt for
+   Copyright (c) 2017 Fred Mitchell and Sensorberg GbmH. See LICENSE.txt for
    further details.
