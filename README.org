@@ -6,7 +6,10 @@
 
 ** Preliminaries
    
-   This is implemented as a DSLish Ruby-friendly interface.
+   This is implemented as a DSLish Ruby-friendly interface. The
+   initial implementation shall be as "lean" as possible, basically
+   serving our needs at Sensorberg. Eventually, we'll flesh this 
+   out to fully support most of the ffi-rzmq interface.
 
 ** Install
    
