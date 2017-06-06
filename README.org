@@ -1,15 +1,42 @@
-* rzmq-enhancement
+* rzmq-enhancement                                                 :TOC_5_gh:
+  - [[#intro][Intro]]
+  - [[#note-well][NOTE WELL]]
+  - [[#preliminaries][Preliminaries]]
+  - [[#install][Install]]
+  - [[#usage][Usage]]
+  - [[#contributing-to-rzmq-enhancement][Contributing to rzmq-enhancement]]
+  - [[#copyright][Copyright]]
+
+** Intro
 
   The ffi-rzmq wraps ZeroMQ nicely, but not in a Ruby-friendly manner.
   here, we take that one step further to present a more Ruby-friendy
-  interface.
+  interface. We also pass all objects as JSON, encoding and decoding
+  them automatically for you, so you don't have to be concered
+  with the details.
+
+** NOTE WELL
+   This is still under development, and currently represents
+   only a minimal interface. For the versions of 0.0.x,
+   there will be "rapid" development and breaking changes.
+   
+   Only when we reach version 0.1.0 or higher, the interfaces
+   and the API will be stable enough for general use.
+
+   Feel free to play with this for now, but don't put it in production
+   code just yet.
 
 ** Preliminaries
-   
+
    This is implemented as a DSLish Ruby-friendly interface. The
    initial implementation shall be as "lean" as possible, basically
    serving our needs at Sensorberg. Eventually, we'll flesh this 
    out to fully support most of the ffi-rzmq interface.
+
+   This is also "opinionated". We pass all objects as JSON
+   strings, which will probably suit most needs, and will 
+   allow the receiving (and sending) ends to be language-agnostic,
+   as long as they use JSON as well.
 
 ** Install
    
@@ -25,6 +52,21 @@
    #+begin_src ruby
    gem 'rzmq-enhancement'
    #+end_src
+   
+** Usage
+   Do not use "localhost". Use, instead, 127.0.0.1, example:
+
+   #+begin_src ruby
+   'tcp://127.0.0.1:2200'
+   #+end_src
+
+   Or if all the processes will be running on the same
+   machine,
+
+   #+begin_src ruby
+   'ipc://anynameyoulike.ipc' 
+   #+end_src
+
 
 ** Contributing to rzmq-enhancement
  
