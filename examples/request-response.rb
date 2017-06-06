@@ -4,24 +4,13 @@ require 'thread'
 
 include ZeroMQ
 EP = 'ipc://reqresp.ipc' 
-thr = []
+#EP = "tcp://127.0.0.1:5555"
+
 
 # request
-thr << Thread.new { 
-  (0..10).each do |i|
-    zeromq_request :request_example, EP, payload: [i, i*i] do |result|
-      pp result, "result"
-    end
-  end
-}
 
-# response
-thr << Thread.new { 
-  zeromq_response_server :response_example, EP do |payload|
-    pp payload, "respond to this"
-    i, j = payload
-    i + j
+(0..10).each do |i|
+  zeromq_request( :request_example, EP, payload: [i, i*i] ) do |result|
+    pp result, "result"
   end
-}
-
-thr.each { |t| t.join }
+end

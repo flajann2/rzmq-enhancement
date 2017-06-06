@@ -20,12 +20,11 @@ module ZeroMQ
 
   # we make the request and return the response
   def zeromq_request name, endpoint = "ipc://#{name}.ipc", **opts, &block
-    h = grand_pusher ZMQ::REQ, name, endpoint, **opts &block
-    
+    h = grand_pusher ZMQ::REQ, name, endpoint, **opts, &block    
   end  
 
   def zeromq_response_server name, endpoint = "ipc://#{name}.ipc", &block
-    grand_server ZMQ::PULL, name, endpoint, respond: true &block
+    grand_server ZMQ::PULL, name, endpoint, bind: true, respond: true &block
   end
   
   private
@@ -69,8 +68,11 @@ module ZeroMQ
 
     h.pull_sock = h.ctx.socket(type)
     error_check(h.pull_sock.setsockopt(ZMQ::LINGER, 0))
-    
-    rc = h.pull_sock.connect(endpoint)
+    rc = if opts[:bind]
+           h.pull_sock.connect(endpoint)
+         else
+           h.pull_sock.connect(endpoint)
+         end
     error_check(rc)
 
     loop do
