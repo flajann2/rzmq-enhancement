@@ -27,4 +27,4 @@ thr << Thread.new {
   end
 }
 
-thr.each {|t| t.join }
+thr.each { |t| t.join }
