@@ -4,6 +4,7 @@
   - [[#preliminaries][Preliminaries]]
   - [[#install][Install]]
   - [[#usage][Usage]]
+    - [[#tips][Tips]]
   - [[#contributing-to-rzmq-enhancement][Contributing to rzmq-enhancement]]
   - [[#copyright][Copyright]]
 
@@ -54,6 +55,9 @@
    #+end_src
    
 ** Usage
+   Please see the [[./examples][Examples.]]
+
+*** Tips
    Do not use "localhost". Use, instead, 127.0.0.1, example:
 
    #+begin_src ruby
@@ -66,7 +70,6 @@
    #+begin_src ruby
    'ipc://anynameyoulike.ipc' 
    #+end_src
-
 
 ** Contributing to rzmq-enhancement
  
