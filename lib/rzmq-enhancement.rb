@@ -24,7 +24,7 @@ module ZeroMQ
   end  
 
   def zeromq_response_server name, endpoint = "ipc://#{name}.ipc", &block
-    grand_server ZMQ::PULL, name, endpoint, bind: true, respond: true &block
+    grand_server ZMQ::REP, name, endpoint, bind: true, respond: true, &block
   end
   
   private
@@ -53,7 +53,7 @@ module ZeroMQ
         # here, we call the block with the results
         rc = h.push_sock.send_string(JSON.generate(opts[:payload]))
         error_check(rc)
-        rc h.push_sock.recv_string(result = '')
+        rc = h.push_sock.recv_string(result = '')
         error_check(rc)
         block.(JSON.parse(result))
       end
