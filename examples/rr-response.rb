@@ -1,6 +1,5 @@
 require 'rzmq-enhancement'
 require 'pp'
-require 'thread'
 
 include ZeroMQ
 EP = 'ipc://reqresp.ipc' 
