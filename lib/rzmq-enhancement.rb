@@ -36,7 +36,7 @@ module ZeroMQ
           h.ctx = ZMQ::Context.create(1)
           h.push_sock = h.ctx.socket(type)
           error_check(h.push_sock.setsockopt(ZMQ::LINGER, 0))
-          rc = h.push_sock.bind(endpoint)
+          rc = h.push_sock.connect(endpoint)
           error_check(rc)
           h
         else
@@ -67,7 +67,7 @@ module ZeroMQ
     h.ctx = ZMQ::Context.create(1)
 
     h.server_sock = h.ctx.socket(type)
-    #error_check(h.server_sock.setsockopt(ZMQ::LINGER, 0))
+    error_check(h.server_sock.setsockopt(ZMQ::LINGER, 0))
     rc = if opts[:bind]
            h.server_sock.bind(endpoint)
          else

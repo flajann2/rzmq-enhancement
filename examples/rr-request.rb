@@ -2,7 +2,7 @@ require 'rzmq-enhancement'
 require 'pp'
 
 include ZeroMQ
-EP = 'ipc://reqresp.ipc' 
+EP = 'tcp://127.0.0.1:17666' 
 
 # request
 
