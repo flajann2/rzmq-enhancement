@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Fred Mitchell".freeze, "Sensorberg GmbH".freeze]
-  s.date = "2017-06-06"
+  s.date = "2017-06-07"
   s.description = "\n  The ffi-rzmq wraps ZeroMQ nicely, but not in a Ruby-friendly manner.\n  here, we take that one step further to present a mor Ruby-Friendy\n  interface.".freeze
   s.email = "frederick.mitchell@sensorberg.com".freeze
   s.executables = ["rzmq".freeze]
@@ -30,7 +30,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "bin/rzmq",
     "examples/push-pull.rb",
-    "examples/request-response.rb",
     "lib/rzmq-enhancement.rb",
     "rzmq-enhancement.gemspec",
     "spec/rzmq-enhancement_spec.rb",
