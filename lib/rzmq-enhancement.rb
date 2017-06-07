@@ -66,22 +66,22 @@ module ZeroMQ
     h = (@ctxh[name] ||= OpenStruct.new)
     h.ctx = ZMQ::Context.create(1)
 
-    h.pull_sock = h.ctx.socket(type)
-    error_check(h.pull_sock.setsockopt(ZMQ::LINGER, 0))
+    h.server_sock = h.ctx.socket(type)
+    #error_check(h.server_sock.setsockopt(ZMQ::LINGER, 0))
     rc = if opts[:bind]
-           h.pull_sock.connect(endpoint)
+           h.server_sock.bind(endpoint)
          else
-           h.pull_sock.connect(endpoint)
+           h.server_sock.connect(endpoint)
          end
     error_check(rc)
 
-    loop do
-      rc = h.pull_sock.recv_string payload = ''
+    loop do     
+      rc = h.server_sock.recv_string payload = ''
       error_check(rc)
       
       result = block.(JSON.parse(payload))
       if opts[:respond]
-        rc = h.pull_sock.send_string JSON.generate(result)  
+        rc = h.server_sock.send_string JSON.generate(result)  
       end
     end if block_given?
     h
