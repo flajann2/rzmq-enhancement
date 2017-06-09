@@ -11,21 +11,33 @@ Thread.abort_on_exception = true
 
 module ZeroMQ
  
-  def zeromq_push name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", ctx: :default, &block
+  def zeromq_push name,
+                  endpoint = "ipc://#{IPCDIR}/#{name}.ipc",
+                  ctx: :default,
+                  &block
     grand_pusher ZMQ::PUSH, name, endpoint, ctx: ctx, &block
   end  
 
   # this does an endless loop as a "server"  
-  def zeromq_pull_server name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", ctx: :default, &block
-    grand_server ZMQ::PULL, name, endpoint, &block
+  def zeromq_pull_server name,
+                         endpoint = "ipc://#{IPCDIR}/#{name}.ipc",
+                         ctx: :default,
+                         &block
+    grand_server ZMQ::PULL, name, endpoint, ctx: ctx, bind: true, &block
   end
 
   # we make the request and return the response
-  def zeromq_request name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", **opts, &block
+  def zeromq_request name,
+                     endpoint = "ipc://#{IPCDIR}/#{name}.ipc",
+                     **opts,
+                     &block
     h = grand_pusher ZMQ::REQ, name, endpoint, **opts, &block
   end  
 
-  def zeromq_response_server name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", ctx: :default, &block
+  def zeromq_response_server name,
+                             endpoint = "ipc://#{IPCDIR}/#{name}.ipc",
+                             ctx: :default,
+                             &block
     grand_server ZMQ::REP, name, endpoint, bind: true, respond: true, ctx: ctx, &block
   end
   
@@ -37,8 +49,9 @@ module ZeroMQ
   # TODO: We don't handle the non-block req case at all. Do we want to?
   def grand_pusher type, name, endpoint, **opts, &block
     init_sys
-    h = if @ctxh[ctx_name(name, opts)].nil?
-          h = (@ctxh[ctx_name(name, opts)] ||= OpenStruct.new)
+    ctxname = ctx_name(name,opts)
+    h = if @ctxh[ctxname].nil?
+          h = (@ctxh[ctxname] ||= OpenStruct.new)
           h.ctx = ZMQ::Context.create(1)
           h.push_sock = h.ctx.socket(type)
           error_check(h.push_sock.setsockopt(ZMQ::LINGER, 0))
@@ -46,7 +59,7 @@ module ZeroMQ
           error_check(rc)
           h
         else
-          @ctxh[ctx_name(name, opts)]
+          @ctxh[ctxname]
         end
     
     if block_given?
@@ -69,7 +82,8 @@ module ZeroMQ
 
   def grand_server type, name, endpoint, **opts, &block
     init_sys
-    h = (@ctxh[ctx_name(name, opts)] ||= OpenStruct.new)
+    ctxname = ctx_name(name,opts)
+    h = (@ctxh[ctxname] ||= OpenStruct.new)
     h.ctx = ZMQ::Context.create(1)
 
     h.server_sock = h.ctx.socket(type)

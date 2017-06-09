@@ -29,6 +29,8 @@ Gem::Specification.new do |s|
     "README.org",
     "Rakefile",
     "bin/rzmq",
+    "examples/push-pull-ipc.rb",
+    "examples/push-pull-tcp.rb",
     "examples/rr-request-ipc.rb",
     "examples/rr-request-tcp.rb",
     "examples/rr-response-ipc.rb",
