@@ -30,8 +30,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "bin/rzmq",
     "examples/push-pull.rb",
-    "examples/rr-request.rb",
-    "examples/rr-response.rb",
     "lib/rzmq-enhancement.rb",
     "rzmq-enhancement.gemspec",
     "spec/rzmq-enhancement_spec.rb",
