@@ -7,7 +7,7 @@ include ZeroMQ
 # request
 
 (0..10).each do |i|
-  zeromq_request( :hello, payload: [i, i*i] ) do |result|
+  zeromq_request( :hello_example, payload: [i, i*i] ) do |result|
     print "result: "
     pp result
   end
