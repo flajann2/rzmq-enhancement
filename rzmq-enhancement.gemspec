@@ -36,6 +36,7 @@ Gem::Specification.new do |s|
     "examples/rr-response-ipc.rb",
     "examples/rr-response-tcp.rb",
     "lib/rzmq-enhancement.rb",
+    "rzmq-enhancement.gemspec",
     "spec/rzmq-enhancement_spec.rb",
     "spec/spec_helper.rb"
   ]
