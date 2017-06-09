@@ -5,7 +5,7 @@ include ZeroMQ
 
 # response
 
-zeromq_response_server :hello, do |payload|
+zeromq_response_server :hello do |payload|
   print "respond to this: "
   pp payload
   i, j = payload
