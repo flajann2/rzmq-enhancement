@@ -3,7 +3,7 @@ require 'pp'
 require 'thread'
 
 include ZeroMQ
-EP = 'ipc://pushpull.ipc' 
+EP = 'ipc:///tmp/pushpull.ipc' 
 thr = []
 
 # push

@@ -5,29 +5,32 @@ require 'awesome_print'
 require 'ostruct'
 require 'json'
 
+IPCDIR = '/tmp'
+
 Thread.abort_on_exception = true
 
 module ZeroMQ
  
-  def zeromq_push name, endpoint = "ipc://#{name}.ipc", &block
+  def zeromq_push name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", &block
     grand_pusher ZMQ::PUSH, name, endpoint, {},  &block
   end  
 
   # this does an endless loop as a "server"  
-  def zeromq_pull_server name, endpoint = "ipc://#{name}.ipc", &block
+  def zeromq_pull_server name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", &block
     grand_server ZMQ::PULL, name, endpoint, &block
   end
 
   # we make the request and return the response
-  def zeromq_request name, endpoint = "ipc://#{name}.ipc", **opts, &block
+  def zeromq_request name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", **opts, &block
     h = grand_pusher ZMQ::REQ, name, endpoint, **opts, &block    
   end  
 
-  def zeromq_response_server name, endpoint = "ipc://#{name}.ipc", &block
+  def zeromq_response_server name, endpoint = "ipc://#{IPCDIR}/#{name}.ipc", &block
     grand_server ZMQ::REP, name, endpoint, bind: true, respond: true, &block
   end
   
   private
+  
   # TODO: We don't handle the non-block req case at all. Do we want to?
   def grand_pusher type, name, endpoint, **opts, &block
     init_sys
