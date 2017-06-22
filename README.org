@@ -93,6 +93,6 @@
    - Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 ** Copyright
-
-   Copyright (c) 2017 Fred Mitchell and Sensorberg GbmH. See LICENSE.txt for
+   Rights have been transferred by Fred Mitchell to:
+   Copyright (c) 2017 Sensorberg GbmH. See LICENSE.txt for
    further details.
