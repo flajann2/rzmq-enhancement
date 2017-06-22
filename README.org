@@ -5,6 +5,7 @@
   - [[#install][Install]]
   - [[#usage][Usage]]
     - [[#tips][Tips]]
+  - [[#release-notes][Release Notes]]
   - [[#contributing-to-rzmq-enhancement][Contributing to rzmq-enhancement]]
   - [[#copyright][Copyright]]
 
@@ -20,30 +21,35 @@
    This is still under development, and currently represents
    only a minimal interface. For the versions of 0.0.x,
    there will be "rapid" development and breaking changes.
-   
+
    Only when we reach version 0.1.0 or higher, the interfaces
    and the API will be stable enough for general use.
 
    Feel free to play with this for now, but don't put it in production
-   code just yet.
+   code just yet. Or if you do, be very aggressive about locking down
+   the exact version. For example:
+
+   #+begin_src ruby
+   gem 'rzmq_enhancement', '0.0.27'
+   #+end_src
 
 ** Preliminaries
 
    This is implemented as a DSLish Ruby-friendly interface. The
    initial implementation shall be as "lean" as possible, basically
-   serving our needs at Sensorberg. Eventually, we'll flesh this 
+   serving our needs at Sensorberg. Eventually, we'll flesh this
    out to fully support most of the ffi-rzmq interface.
 
    This is also "opinionated". We pass all objects as JSON
-   strings, which will probably suit most needs, and will 
+   strings, which will probably suit most needs, and will
    allow the receiving (and sending) ends to be language-agnostic,
    as long as they use JSON as well.
 
 ** Install
-   
+
    Make sure the ZeroMQ library is already installed on your system. If you
    are on a Mac, we recommend 'brew' or 'macports' to get it.
-   
+
    From command-line:
    #+begin_src bash
    gem install rzmq-enhancement
@@ -53,7 +59,7 @@
    #+begin_src ruby
    gem 'rzmq-enhancement'
    #+end_src
-   
+
 ** Usage
    Please see the [[./examples][Examples.]]
 
@@ -68,11 +74,16 @@
    machine,
 
    #+begin_src ruby
-   'ipc://anynameyoulike.ipc' 
+   'ipc://anynameyoulike.ipc'
    #+end_src
 
+** Release Notes
+   | version |       date | details                                                                              |
+   |---------+------------+--------------------------------------------------------------------------------------|
+   | v0.0.27 | 2017-06-22 | zeromq_push semantics now allows you to properly pass the payload in as a parameter. |
+
 ** Contributing to rzmq-enhancement
- 
+
    - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
    - Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
    - Fork the project.
